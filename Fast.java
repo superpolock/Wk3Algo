@@ -55,16 +55,17 @@ public class Fast {
 	        		slopes[z].idx = -1;
 	        		slopes[z].slope = Double.NEGATIVE_INFINITY;
 	        	}
+	        	// x is the initial point we are determining slope from
 	        	for (int y=x+1; y<N; ++y) {
 	        		slopes[y].idx = y;
 	        		slopes[y].slope=points[x].slopeTo(points[y]);
 	        	}
 	        	Arrays.sort(slopes);
 	        	// Find similar slopes from points, and store in colPoints if we have enough in a row
-	        	for (int w=x; w < N-2; ++w ) { // go through N-1 so we know we can grab first slope, and compare to next. If we only have one slope, can't have another equal
+	        	for (int w=x+1; w < N; ++w ) {
 	        		final double slopeToMatch = slopes[w].slope;
 	        		final int initialIdx = w;
-	        		while ( (w < N-1) && (slopes[w+1].slope==slopeToMatch) ) {
+	        		while ( (w < N) && (slopes[w].slope==slopeToMatch) ) {
 	        			w++;
 	        		}
 	        		// w now points to the last point which matches the initial slope
