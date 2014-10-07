@@ -17,12 +17,18 @@ public class Point implements Comparable<Point> {
     // compare points by slope
 	private static class PointComparer implements Comparator<Point> {
     	public int compare(Point p1, Point p2 ) {
+    		if ( null == p1 || null == p2 ) {
+    			throw new java.lang.NullPointerException();
+    		}
     		int yCompare = p2.y - p1.y;
     		if ( 0 == yCompare )
     			return p2.x - p1.x;
     		return yCompare;
     	}
     	boolean equals( Point p1, Point p2 ) {
+    		if ( null == p1 || null == p2 ) {
+    			throw new java.lang.NullPointerException();
+    		}
     		return (p1.y == p2.y && p1.x == p2.x);
     	}
 	};
@@ -53,6 +59,9 @@ public class Point implements Comparable<Point> {
 
     // slope between this point and that point
     public double slopeTo(Point that) {
+    	if ( null == that ) {
+    		throw new java.lang.NullPointerException();
+    	}
     	if ( this.x != that.x )
     		return ( (double)( that.y - this.y )/(that.x - this.x));
     	else
@@ -62,6 +71,9 @@ public class Point implements Comparable<Point> {
     // is this point lexicographically smaller than that one?
     // comparing y-coordinates and breaking ties by x-coordinates
     public int compareTo(Point that) {
+    	if ( null == that ) {
+    		throw new java.lang.NullPointerException();
+    	}
 		int yCompare = this.y - that.y;
 		if ( 0 == yCompare )
 			return this.x - that.x;
