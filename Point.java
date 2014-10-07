@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-	public static class PointComparer implements Comparator<Point> {
+	private static class PointComparer implements Comparator<Point> {
     	public int compare(Point p1, Point p2 ) {
     		int yCompare = p2.y - p1.y;
     		if ( 0 == yCompare )

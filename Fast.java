@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public class Fast {
-	public class IdxSlope implements Comparable<IdxSlope>  {
+	private class IdxSlope implements Comparable<IdxSlope>  {
 		int idx; // idx in points array
 		double slope;
 		public int compareTo(IdxSlope other) {
@@ -37,8 +37,8 @@ public class Fast {
 	            int y = in.readInt();
 	            points[i] = new Point(x, y);
 	            points[i].draw();
+		        StdDraw.show(0);
 	        }
-	        StdDraw.show(0);
 	        
 	        Arrays.sort(points);
 	        // Create an array to store the slopes and point index for the current points being examined
@@ -65,11 +65,15 @@ public class Fast {
 	        	for (int w=x+1; w < N; ++w ) {
 	        		final double slopeToMatch = slopes[w].slope;
 	        		final int initialIdx = w;
+//	        		StdOut.printf("Slope %f: %s", slopeToMatch, points[w-1].toString());
 	        		while ( (w < N) && (slopes[w].slope==slopeToMatch) ) {
+	//					StdOut.printf(" -> %s", points[w].toString());
 	        			w++;
 	        		}
+	  //      		StdOut.printf("\n");
 	        		// w now points to the last point which matches the initial slope
-	        		if ( (w - initialIdx) > 2 ) {
+	        		final int pointsOnLine = 2 + w - initialIdx;
+	        		if ( pointsOnLine > 3 ) {
 	        			// For each matching slope, record the index it is collinear with
 	        			// HACK - how do we make sure we don't duplicate a subsection of a previously matched string?
 	        			//  Answer? We have initialized all colPoints. When we find a collinear point, lets put an indicator in the colPoints array to say we can't populate the value
@@ -81,6 +85,7 @@ public class Fast {
 	        			}
 	        		}
 	        	}
+	    //    	StdOut.printf("\n");
 	        }
         }
 	}
