@@ -75,10 +75,8 @@ public class Fast {
 	        			//  Answer? We have initialized all colPoints. When we find a collinear point, lets put an indicator in the colPoints array to say we can't populate the value
 	        			// Does this resolve the problem of a point being collinear with multiple sets of points? For example. [0,0][1,0][2,0] and [0,0],[0,1],[0,2]
 	        			for ( int slopeIdx=initialIdx; slopeIdx <= w; ++slopeIdx ){
-	        				if ( slopeIdx > initialIdx ) {
-	        					points[ slopes[slopeIdx - 1].idx ].drawTo( points[ slopes[ slopeIdx ].idx ] );
-	        			        StdDraw.show(0);
-	        				}
+        					points[ x ].drawTo( points[ slopes[ slopeIdx ].idx ] );
+        			        StdDraw.show(0);
 	        				colPoints[slopeIdx][slopes[slopeIdx].idx] = slopeIdx;
 	        			}
 	        		}
