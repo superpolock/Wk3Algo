@@ -27,6 +27,18 @@ public class PointTest {
 	public void testSlopeTo() {
 		assertTrue( -1 == p1.slopeTo(p2));
 		assertTrue( 1 == p1.slopeTo(new Point(2,1)));
+		assertTrue( 0 == p1.slopeTo(new Point(2,0)));
+	}
+	
+	@Test
+	public void testHorizontalSlope() {
+		assertTrue( Double.POSITIVE_INFINITY == p.slopeTo(p1));
+		assertTrue( Double.POSITIVE_INFINITY == p1.slopeTo(p));
+	}
+	
+	@Test
+	public void testVerticalSlope() {
+		assertTrue( Double.NEGATIVE_INFINITY == p.slopeTo(p));
 	}
 
 	@Test
