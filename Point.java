@@ -63,7 +63,7 @@ public class Point implements Comparable<Point> {
     		throw new java.lang.NullPointerException();
     	}
     	if ( this.x != that.x )
-    		return ( (double)( that.y - this.y )/(that.x - this.x));
+    		return ( that.y == this.y ? 0.0 : (double)( that.y - this.y )/(double)(that.x - this.x));
     	else
     		return Double.NEGATIVE_INFINITY;
     }

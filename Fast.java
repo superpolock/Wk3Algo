@@ -7,7 +7,7 @@ public class Fast {
 		double slope;
 		public int compareTo(IdxSlope other) {
 			if ( slope == other.slope ) {
-				return other.idx - idx;
+				return idx - other.idx;
 			}
 			else if ( slope < other.slope )
 				return -1;
@@ -59,12 +59,13 @@ public class Fast {
 	        	for (int y=x+1; y<N; ++y) {
 	        		slopes[y].idx = y;
 	        		slopes[y].slope=points[x].slopeTo(points[y]);
+	        		StdOut.printf("%d => %s -> %s\n ", y, points[x].toString(), points[y].toString());
 	        	}
 	        	Arrays.sort(slopes);
 	        	// Find similar slopes from points, and store in colPoints if we have enough in a row
 	        	for (int w=x+1; w < N; ++w ) {
 	        		final double slopeToMatch = slopes[w].slope;
-	        		final int initialIdx = w;
+	        		final int initialIdx = w++;
 //	        		StdOut.printf("Slope %f: %s", slopeToMatch, points[w-1].toString());
 	        		while ( (w < N) && (slopes[w].slope==slopeToMatch) ) {
 	//					StdOut.printf(" -> %s", points[w].toString());
@@ -73,12 +74,13 @@ public class Fast {
 	  //      		StdOut.printf("\n");
 	        		// w now points to the last point which matches the initial slope
 	        		final int pointsOnLine = 2 + w - initialIdx;
-	        		if ( pointsOnLine > 3 ) {
+	        		if ( pointsOnLine > 4 ) {
 	        			// For each matching slope, record the index it is collinear with
 	        			// HACK - how do we make sure we don't duplicate a subsection of a previously matched string?
 	        			//  Answer? We have initialized all colPoints. When we find a collinear point, lets put an indicator in the colPoints array to say we can't populate the value
 	        			// Does this resolve the problem of a point being collinear with multiple sets of points? For example. [0,0][1,0][2,0] and [0,0],[0,1],[0,2]
 	        			for ( int slopeIdx=initialIdx; slopeIdx < w; ++slopeIdx ){
+	        				StdOut.printf("Line: %s -> %s",  points[x].toString(), points[slopes[slopeIdx].idx]);
         					points[ x ].drawTo( points[ slopes[ slopeIdx ].idx ] );
         			        StdDraw.show(0);
 	        				colPoints[slopeIdx][slopes[slopeIdx].idx] = slopeIdx;
