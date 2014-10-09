@@ -14,6 +14,10 @@ public class Brute {
 	            int y = in.readInt();
 	            points[i] = new Point(x, y);
 	        }
+	        StdDraw.setXscale(0, 32768);
+	        StdDraw.setYscale(0, 32768);
+	        StdDraw.show(0);
+	        StdDraw.setPenRadius(0.01);  // make the points a bit larger
 	        
 	        Arrays.sort(points);
 	        for ( int x = 0; x < N - 3; x++ ) {
@@ -26,9 +30,8 @@ public class Brute {
 	        					double s3 = points[z].slopeTo( points[w] );
 	        					if ( s3 == s2 ) {
 	        						StdOut.printf("%s -> %s -> %s -> %s\n", points[x].toString(), points[y].toString(), points[z].toString(), points[w].toString());
-	        						points[x].drawTo(points[y]);
-	        						points[y].drawTo(points[z]);
-	        						points[z].drawTo(points[w]);
+	        						points[x].drawTo(points[w]);
+	        				        StdDraw.show(0);
 	        					}
 	        				}
 	        			}
