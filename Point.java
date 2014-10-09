@@ -15,15 +15,18 @@ import java.util.Comparator;
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-    private static class PointComparer implements Comparator<Point> {
+    private class PointComparer implements Comparator<Point> {
+    	Point origin;
+    	public PointComparer(Point p0){ origin = p0; }
         public int compare(Point p1, Point p2){
-            if(null == p1 || null == p2){
-                throw new java.lang.NullPointerException();
-            }
-            int yCompare = p2.y - p1.y;
-            if(0 == yCompare )
-                return p2.x - p1.x;
-            return yCompare;
+        	double p1Slope = origin.slopeTo(p1);
+        	double p2Slope = origin.slopeTo(p2);
+        	if ( p1Slope < p2Slope )
+        		return -1;
+        	else if ( p1Slope > p2Slope )
+        		return 1;
+        	else
+        		return 0;
         }
         boolean equals( Point p1, Point p2){
             if(null == p1 || null == p2){
@@ -33,7 +36,7 @@ public class Point implements Comparable<Point> {
         }
     };
     
-    public final Comparator<Point> SLOPE_ORDER = new PointComparer(); 
+    public final Comparator<Point> SLOPE_ORDER = new PointComparer(this); 
 
     private final int x;                              // x coordinate
     private final int y;                              // y coordinate

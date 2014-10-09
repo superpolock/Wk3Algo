@@ -47,5 +47,45 @@ public class PointTest {
 		assertTrue( p1.compareTo(p3) == 0 );
 		assertFalse( p1.compareTo(p2) > 0 );
 	}
+	
+	@Test
+	public void testCompare() {
+	     Point p = new Point(111, 308);
+	     Point q = new Point(226, 103);
+	     Point r = new Point(336, 475);
+	     double pqr = p.SLOPE_ORDER.compare(q,r);
+	     assertTrue( p.SLOPE_ORDER.compare(q,r)==-1);
+	     double a = p.slopeTo(q);
+	     assertTrue( a == -1.7826086956521738);
+	     double b = p.slopeTo(r);
+	     assertTrue( b == 0.7422222222222222);
+	}
 
+	@Test
+	public void testCompareB() {
+	     Point p = new Point(26441, 16877);
+	     Point q = new Point(10095, 13094);
+	     Point r = new Point(26541, 30052);
+	     double pqr = p.SLOPE_ORDER.compare(q,r);
+	     assertTrue( pqr==1);
+	     double a = p.slopeTo(q);
+	     assertTrue( a == 0.23143276642603694);
+	     double b = p.slopeTo(r);
+	     assertTrue( b == 131.75);
+	}
+
+	@Test
+	public void testCompareC() {
+	     Point p = new Point(6,4);
+	     Point q = new Point(1,5);
+	     Point r = new Point(7,8);
+	     assertTrue( p.SLOPE_ORDER.compare(q,r)==-1);
+	     assertTrue( p.slopeTo(q) == -0.2);
+	     assertTrue( p.slopeTo(r) == 4);
+	}
+	
+	@Test
+	public void testCompareNull() {
+		// Hack, these should be throwing exceptions
+	}
 }
