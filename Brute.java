@@ -23,7 +23,7 @@ public class Brute {
 	        Arrays.sort(points);
 	        Point lastDrawnPoint = null;
 	        for ( Point currPoint:points ) {
-	        	if ( null == lastDrawnPoint || currPoint.equals(lastDrawnPoint)) {
+	        	if ( null == lastDrawnPoint || !currPoint.equals(lastDrawnPoint)) {
 	        		currPoint.draw();
 	        		lastDrawnPoint = currPoint;
 	        	}
