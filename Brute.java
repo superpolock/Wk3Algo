@@ -21,6 +21,13 @@ public class Brute {
 	        StdDraw.setPenRadius(0.01);  // make the points a bit larger
 	        
 	        Arrays.sort(points);
+	        Point lastDrawnPoint = null;
+	        for ( Point currPoint:points ) {
+	        	if ( null == lastDrawnPoint || currPoint.equals(lastDrawnPoint)) {
+	        		currPoint.draw();
+	        		lastDrawnPoint = currPoint;
+	        	}
+	        }
 	        for ( int x = 0; x < N - 3; x++ ) {
 	        	for ( int y = x+1; y < N - 2; y++ ) {
 	        		double s1 = points[x].slopeTo(points[y]);
