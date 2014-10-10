@@ -67,7 +67,7 @@ public class PointTest {
 	     Point q = new Point(10095, 13094);
 	     Point r = new Point(26541, 30052);
 	     double pqr = p.SLOPE_ORDER.compare(q,r);
-	     assertTrue( pqr==1);
+	     assertTrue( pqr==-1);
 	     double a = p.slopeTo(q);
 	     assertTrue( a == 0.23143276642603694);
 	     double b = p.slopeTo(r);
@@ -87,5 +87,42 @@ public class PointTest {
 	@Test
 	public void testCompareNull() {
 		// Hack, these should be throwing exceptions
+	}
+	
+	@Test
+	public void testHorizontalPoints() {
+		Point p = new Point(0,0);
+		Point q = new Point(1,0);
+		Point r = new Point(0,1);
+		
+		assertTrue( +0.0 == p.compareTo(q));
+		assertTrue( +0.0 == q.compareTo(p));
+		
+		assertTrue( p.SLOPE_ORDER.compare(p, q) == 0 );
+	}
+	
+	@Test
+	public void testDegeneratePoints() {
+		Point p = new Point(1,1);
+		Point q = new Point(1,1);
+		
+		assertTrue( p.equals(q));
+		assertTrue( p.compareTo(p) == Double.NEGATIVE_INFINITY);
+		assertTrue( p.compareTo(q) == Double.NEGATIVE_INFINITY);
+		
+		assertTrue( p.SLOPE_ORDER.compare(p,q) == 0 );
+	}
+	
+	@Test
+	public void testVerticalLines() {
+		Point p = new Point(0,0);
+		Point q = new Point(1,0);
+		Point r = new Point(0,1);
+		
+		assertTrue( Double.POSITIVE_INFINITY == p.compareTo(r));
+		assertTrue( Double.POSITIVE_INFINITY == r.compareTo(p));
+		
+		assertTrue( p.SLOPE_ORDER.compare(p, r) == 0 );
+		
 	}
 }

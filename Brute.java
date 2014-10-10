@@ -1,6 +1,7 @@
 import java.util.Arrays;
 
 public class Brute {
+	
 	public static void main(String[] args) {
         // read in the input
 		In in = null;
