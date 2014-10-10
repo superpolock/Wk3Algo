@@ -84,22 +84,15 @@ public class Fast {
 		for (int y = x + 1; y < N; ++y) {
 			slopes[y].idx = y;
 			slopes[y].slope = points[x].slopeTo(points[y]);
-			StdOut.printf("%f => %s -> %s\n ", slopes[y].slope,
-					points[x].toString(), points[y].toString());
 		}
 		Arrays.sort(slopes);
 
-		for (IdxSlope curr : slopes) {
-			StdOut.printf("%d  %f   %s -> %s\n", curr.idx, curr.slope,
-					points[x].toString(), points[curr.idx].toString());
-		}
 		Point minPoint = points[slopes[x].idx];
 		Point maxPoint = minPoint;
 		// Find similar slopes from points, and store in colPoints if we have
 		// enough in a row
 		for (int w = x + 1; w < N;) {
 			final double slopeToMatch = slopes[w].slope;
-			StdOut.printf("\nSlope %f: %s", slopeToMatch, points[w].toString());
 			final int initialIdx = w++;
 			while ((w < (N - 1)) && (slopes[w + 1].slope == slopeToMatch)) {
 				w++;
@@ -108,8 +101,9 @@ public class Fast {
 			final int pointsOnLine = 2 + w - initialIdx;
 			if (pointsOnLine > 3) {
 				w = initialIdx;
-				minPoint = points[x];
+				minPoint = points[slopes[x].idx];
 				maxPoint = minPoint;
+				StdOut.printf("%s",minPoint.toString());
 				while ((w < N) && (slopes[w].slope == slopeToMatch)) {
 					minPoint = min(minPoint, points[slopes[w].idx]);
 					maxPoint = max(maxPoint, points[slopes[w].idx]);
@@ -117,13 +111,10 @@ public class Fast {
 				}
 				StdOut.printf("\n");
 				minPoint.drawTo(maxPoint);
-				StdOut.printf("Draw line from %s to %s\n", minPoint.toString(),
-						maxPoint.toString());
 				StdDraw.show(0);
 			}
 			assert (w > initialIdx);
 		}
-		StdOut.printf("\n");
 
 	}
 
